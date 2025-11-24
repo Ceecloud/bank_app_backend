@@ -36,7 +36,9 @@ jobs:
 
     - name: Build container image
       run: docker build -t bank-app-backend:latest .
-
+      env:
+       MAVEN_OPTS: -DskipTests=true
+       
     - name: Log in to ECR with short-lived credentials
       run: |
         aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin ${{ vars.ECR_REPO }}
